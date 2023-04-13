@@ -1,0 +1,27 @@
+{
+	"name": "jam-backend",
+	"version": "1.0.0",
+	"description": "Backend API for an ecommerce app written in NodeJS, ExpressJS and uses pgSQL.",
+	"main": "index.js",
+	"scripts": {
+        "start": "ts-node server/index.ts",
+        "dev": "nodemon server/index.ts",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/danishiqbal4/jam-backend.git"
+	},
+	"author": "Sheikh Danish Iqbal",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/danishiqbal4/jam-backend/issues"
+	},
+	"homepage": "https://github.com/danishiqbal4/jam-backend#readme",
+	"dependencies": {
+		"@types/node": "^18.15.11",
+		"express": "^4.18.2",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.0.4"
+	}
+}
