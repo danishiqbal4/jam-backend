@@ -2,6 +2,8 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import bodyParser from "body-parser";
 // import cors from "cors";
 import db from "./models";
+import authRoutes from "./routes/auth.routes";
+import userRoutes from "./routes/user.routes";
 
 const app = express();
 
@@ -36,8 +38,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
-	res.json({ message: "Hello Jum Al Majid." });
+	res.json({ message: "Hello Juma Al Majid." });
 });
+
+authRoutes(app);
+userRoutes(app);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
