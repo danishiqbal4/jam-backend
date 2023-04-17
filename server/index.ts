@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import db from "./models";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
+import productRoutes from "./routes/product.routes";
 import sequelize from './models/sequelize';
 
 const app = express();
@@ -44,6 +45,7 @@ app.get("/", (req: Request, res: Response) => {
 
 authRoutes(app);
 userRoutes(app);
+productRoutes(app);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
