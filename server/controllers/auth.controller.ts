@@ -64,7 +64,7 @@ const signin = async (req: Request, res: Response) => {
     try {
         user = await User.findOne({
             where: {
-                username: req.body.username
+                username: req.body.username.trim().toLowerCase(),
             }
         });
 
@@ -73,7 +73,7 @@ const signin = async (req: Request, res: Response) => {
         }
 
         const passwordIsValid = bcrypt.compareSync(
-            req.body.password,
+            req.body.password.trim(),
             user.password
         );
 
@@ -97,7 +97,7 @@ const signin = async (req: Request, res: Response) => {
                 authorities.push(`ROLE_${roles[i].name.toUpperCase()}`);
             }
 
-            res.status(200).send({
+            return res.status(200).send({
                 id: user.id,
                 username: user.username,
                 email: user.email,
@@ -105,10 +105,10 @@ const signin = async (req: Request, res: Response) => {
                 accessToken: token
             });
         } else {
-            res.status(500).send({ message: "Unable to get roles of the user" });
+            return res.status(500).send({ message: "Unable to get roles of the user" });
         }
     } catch (err: any) {
-        res.status(500).send({ message: err.message });
+        return res.status(500).send({ message: err.message });
     }
 };
 
