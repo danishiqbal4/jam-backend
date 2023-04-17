@@ -1,11 +1,12 @@
-import { Dialect } from "sequelize";
+import { Dialect, Sequelize, Op } from "sequelize";
 
 export interface DB {
-    Sequelize?: any;
-    sequelize?: any;
-    user?: any;
-    role?: any;
-    roles?: Array<string>;
+    Sequelize: typeof Sequelize;
+    sequelize: Sequelize;
+    user: any;
+    role: any;
+    roles: Array<string>;
+    Op: typeof Op;
 }
 
 export interface DbConfig {

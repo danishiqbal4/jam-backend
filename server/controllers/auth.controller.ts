@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 
 const User = db.user;
 const Role = db.role;
-const Op = db.Sequelize.Op;
+const Op = db.Op;
 
 interface Role {
     name: string;

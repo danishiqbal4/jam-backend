@@ -1,5 +1,5 @@
 import DbConfig from "../config/db.config";
-import { Sequelize } from "sequelize";
+import { Sequelize, Op } from "sequelize";
 import user from "./user.model";
 import role from "./role.model";
 import { DB } from "../types/types.db";
@@ -27,12 +27,14 @@ const sequelize = new Sequelize(
     }
 );
 
-const db: DB = {};
-
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-db.user = user(sequelize, Sequelize);
-db.role = role(sequelize, Sequelize);
+const db: DB = {
+    Sequelize,
+    sequelize,
+    user: user(sequelize, Sequelize),
+    role: role(sequelize, Sequelize),
+    roles: ["user", "admin"],
+    Op
+};
 
 db.role.belongsToMany(db.user, {
     through: "user_roles",
@@ -45,7 +47,5 @@ db.user.belongsToMany(db.role, {
     foreignKey: "userId",
     otherKey: "roleId"
 });
-
-db.roles = ["user", "admin"];
 
 export default db;
