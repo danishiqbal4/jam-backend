@@ -1,6 +1,6 @@
-import { DbConfig } from "../types/types.db";
+import { IDbConfig } from "../types/types.db";
 
-const DbConfig: DbConfig = {
+const DbConfig: IDbConfig = {
     HOST: "ep-snowy-recipe-577928.ap-southeast-1.aws.neon.tech",
     USER: "danishiqbal4",
     PASSWORD: "dBEeNpf6bIZ4",
