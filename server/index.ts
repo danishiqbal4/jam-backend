@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import db from "./models";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
+import sequelize from './models/sequelize';
 
 const app = express();
 
@@ -20,7 +21,7 @@ const Role = db.role;
 // 	initial();
 // });
 
-db.sequelize.sync();
+sequelize.sync();
 
 const initial = () => {
 	Role.create({
