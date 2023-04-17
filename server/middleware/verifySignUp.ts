@@ -5,31 +5,60 @@ const ROLES = db.roles!;
 const User = db.user;
 
 const checkDuplicateUsernameOrEmail = async (req:Request, res:Response, next:NextFunction) => {
+    let username = "";
+    let email = "";
+    let password = "";
 
-    let user = await User.findOne({
-        where: {
-            username: req.body.username.toLowerCase()
+    try {
+        username = req.body.username.trim().toLowerCase();
+        email = req.body.email.trim().toLowerCase();
+        password = req.body.password.trim();
+
+        if(username == "" || email == "" || password == "") {
+            return res.status(422).send({
+                message: "Please specify Username, Email and Password fields."
+            });
         }
-    });
+    } catch (err: any) {
+        console.log(err.message)
 
-    if (user) {
-        res.status(400).send({
-            message: "Failed! Username is already in use!"
+        return res.status(422).send({
+            message: "Please enter username, email and password correctly."
         });
-        return;
     }
-
-    user = await User.findOne({
-        where: {
-            email: req.body.email.toLowerCase()
-        }
-    });
-
-    if (user) {
-        res.status(400).send({
-            message: "Failed! Email is already in use!"
+    
+    try {
+        let user = await User.findOne({
+            where: {
+                username
+            }
         });
-        return;
+    
+        if (user) {
+            res.status(400).send({
+                message: "Failed! Username is already in use!"
+            });
+            return;
+        }
+    
+        user = await User.findOne({
+            where: {
+                email
+            }
+        });
+    
+        if (user) {
+            res.status(400).send({
+                message: "Failed! Email is already in use!"
+            });
+            return;
+        }
+    } catch (err: any) {
+        console.log(err.message)
+
+        return res.status(500).send({
+            message: "Something went wrong."
+        });
     }
 
     next();
