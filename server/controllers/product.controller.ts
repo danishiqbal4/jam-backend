@@ -34,11 +34,39 @@ const getAllProducts = async (req: Request, res: Response) => {
             products: product
         });
     } catch (err) {
+        console.log(err);
+        res.status(500).send({ message: "Error getting the product list." });
+    }
+}
 
+const getProductById = async (req: Request, res: Response) => {
+    const productId = req.params.productId;
+
+    try {
+        const product = await ProductModel.findOne({
+            where: {
+                id: productId,
+            }
+        });
+
+        if(product) {
+            return res.status(200).send({ 
+                product
+            });
+        } else {
+            return res.status(422).send({ 
+                message: `Product with ID ${productId} does not exist.`
+            });
+        }
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ message: `Error getting the product with ID ${productId}` });
     }
 }
 
 export default {
     createProduct,
-    getAllProducts
+    getAllProducts,
+    getProductById
 }

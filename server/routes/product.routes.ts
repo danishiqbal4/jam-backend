@@ -19,4 +19,6 @@ export default (app: Express) => {
     );
 
     app.get("/api/product/all", productController.getAllProducts);
+
+    app.get("/api/product/:productId", productController.getProductById);
 };
