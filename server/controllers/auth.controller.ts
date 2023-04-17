@@ -23,14 +23,14 @@ interface User {
 
 const signup = async (req: Request, res: Response) => {
     try {
-        const user: User = User.create({
-            username: req.body.username.toLowerCase(),
-            email: req.body.email.toLowerCase(),
-            password: bcrypt.hashSync(req.body.password, 8)
+        const user: User = await User.create({
+            username: req.body.username.trim().toLowerCase(),
+            email: req.body.email.trim().toLowerCase(),
+            password: bcrypt.hashSync(req.body.password.trim(), 8)
         });
     
         if (!user) {
-            return res.status(404).send({ message: "User Not found." });
+            return res.status(404).send({ message: "User registration failed." });
         }
 
         let setNewRole: Array<number> = [];
