@@ -26,6 +26,19 @@ const createProduct = async (req: Request, res: Response) => {
     }
 }
 
+const getAllProducts = async (req: Request, res: Response) => {
+    try {
+        const product = await ProductModel.findAndCountAll();
+
+        return res.status(200).send({ 
+            products: product
+        });
+    } catch (err) {
+
+    }
+}
+
 export default {
-    createProduct
+    createProduct,
+    getAllProducts
 }

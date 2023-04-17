@@ -17,4 +17,6 @@ export default (app: Express) => {
         [authJwt.verifyToken, authJwt.isAdmin],
         productController.createProduct
     );
+
+    app.get("/api/product/all", productController.getAllProducts);
 };
