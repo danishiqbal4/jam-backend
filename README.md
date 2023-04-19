@@ -30,6 +30,10 @@ Once the dev server is running, you can also use POSTMAN to send GET and POST re
 
 This API has 4 endpoints as explained below. The API returns success and error messages as JSON data.
 
+The API authenticates & authorizes and differentiates between admin & user roles users based on the `x-access-token` set in the `header` of each requests.
+
+You can generate an access token when you signin and set that as `x-access-token` in the `header`.
+
 - Signup
 
 This endpoint has 4 required arguments `username`, `email`, `password`, `roles`.
@@ -65,7 +69,7 @@ POST http://127.0.0.1:3001/api/auth/signin
 
 - Create Product
 
-This endpoint has 2 required arguments `name`, `description`, `price`, `quantity`.
+This endpoint requires `admin` user role and has 2 required arguments `name`, `description`, `price`, `quantity`.
 
 The `price` field is a `float` and `quantity` is an `integer`.
 
